@@ -27,7 +27,6 @@ interface RouteProps {
 }
 
 export function Route({ component, path }: RouteProps) {
-	const {} = useRouter();
 	return <div>{component}</div>;
 }
 
@@ -55,17 +54,13 @@ export function RouterProvider({
 
 	const [location, setLocation] = useState<string>(window.location.pathname);
 
-	const updateLocation = (pathname: string) => {
+	const push: Push = (pathname: string) => {
+		history.pushState({}, '', pathname);
 		setLocation(pathname);
 	};
 
-	const push: Push = (pathname: string) => {
-		history.pushState({}, '', pathname);
-		updateLocation(pathname);
-	};
-
 	useEffect(() => {
-		const onPopState = () => updateLocation(window.location.pathname);
+		const onPopState = () => setLocation(window.location.pathname);
 		window.addEventListener('popstate', onPopState);
 		return () => window.removeEventListener('popstate', onPopState);
 	}, []);
