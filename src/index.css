@@ -1,0 +1,11 @@
+body {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+a {
+	color: blue;
+	font-size: x-large;
+}
